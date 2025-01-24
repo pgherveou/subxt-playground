@@ -3757,6 +3757,7 @@ dependencies = [
  "sp-core",
  "subxt",
  "tokio",
+ "tracing-subscriber",
 ]
 
 [[package]]

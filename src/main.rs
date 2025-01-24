@@ -14,7 +14,8 @@ mod subxt_client {}
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    env_logger::init();
+    tracing_subscriber::fmt::init();
+
     let rpc_client = ReconnectingRpcClient::builder()
         .retry_policy(ExponentialBackoff::from_millis(100).max_delay(Duration::from_secs(10)))
         .build("wss://westend-asset-hub-rpc.polkadot.io".to_string())
@@ -30,6 +31,6 @@ async fn main() -> anyhow::Result<()> {
     let runtime_api = api.runtime_api().at(hash);
     let payload = subxt_client::apis().revive_api().block_gas_limit();
     let gas_limit = runtime_api.call(payload).await?;
-    dbg!(gas_limit);
+    log::info!("gas limit result: {gas_limit:?}");
     Ok(())
 }
