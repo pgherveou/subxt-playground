@@ -12,6 +12,7 @@ use subxt::{
 #[subxt::subxt(runtime_metadata_path = "revive_chain.metadata")]
 mod subxt_client {}
 
+// Test with RUST_LOG="jsonrpsee=trace,subxt=trace,info" cargo run
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt::init();
